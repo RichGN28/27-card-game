@@ -72,6 +72,41 @@ def display_images(pile, frame):
             print(f'File {file_path} not found')
 
 
+def display_winner_images(pile, frame):
+    # Destroy existing widgets in the frame
+    for widget in frame.winfo_children():
+        if isinstance(widget, ttk.Label):
+            widget.destroy()
+    
+    counter = 1
+    # Load and display new images
+    for card_image in pile:
+        file_path = f'card_images/{card_image}'
+        
+        if os.path.exists(file_path):
+            if counter == my_number:
+                current_image = Image.open(file_path).resize((75, 125))
+                image_tk = ImageTk.PhotoImage(current_image)
+                image_refs.append(image_tk)
+                label = ttk.Label(frame, image=image_tk)
+                label.pack(side='left')
+            else:
+                # Import an image
+                current_image = Image.open(file_path).resize((50, 100))
+                image_tk = ImageTk.PhotoImage(current_image)
+
+                # Store the reference to the PhotoImage object
+                image_refs.append(image_tk)  # Keep a reference to avoid garbage collection
+        
+                # Create a label with the image and pack it into the frame
+                label = ttk.Label(frame, image=image_tk)
+                label.pack(side='left')
+        else:
+            print(f'File {file_path} not found')
+    
+        counter += 1
+
+
 
 def start_game():
     if 'winner_window' in globals() and winner_window.winfo_exists():
@@ -122,42 +157,18 @@ def iterate(pile_number):
         show_winner()
 
 
-def display_images_winner(pile, frame):
-    # Destroy existing widgets in the frame
-    for widget in frame.winfo_children():
-        if isinstance(widget, ttk.Label):
-            widget.destroy()
-
-    # Load and display new images
-    for card_image in pile:
-        file_path = f'card_images/{card_image}'
-        
-        if os.path.exists(file_path):
-            # Import an image
-            current_image = Image.open(file_path).resize((50, 100))
-            image_tk = ImageTk.PhotoImage(current_image)
-
-            # Store the reference to the PhotoImage object
-            image_refs.append(image_tk)  # Keep a reference to avoid garbage collection
-
-            # Create a label with the image and pack it into the frame
-            label = ttk.Label(frame, image=image_tk)
-            label.pack(side='left')
-        else:
-            print(f'File {file_path} not found')
-
 
 def show_winner():
     global winner_window
     winner_window = tk.Toplevel()
     winner_window.title('Is this your card?')
 
-    frame_winner = ttk.Frame(winner_window, width=300, height=300, borderwidth=10, relief=tk.RIDGE)
+    frame_winner = ttk.Frame(winner_window, width=1800, height=300, borderwidth=10, relief=tk.RIDGE)
     frame_winner.pack(padx=100)
 
     label = ttk.Label(winner_window, text=f'Is your card in the position {my_number}?')
     label.pack()
-    display_images_winner(deck, frame_winner)
+    display_winner_images(deck, frame_winner)
 
 def close_window():
     winner_window.destroy()
