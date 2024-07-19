@@ -64,7 +64,7 @@ def display_images(pile, frame):
 
             # Store the reference to the PhotoImage object
             image_refs.append(image_tk)  # Keep a reference to avoid garbage collection
-
+    
             # Create a label with the image and pack it into the frame
             label = ttk.Label(frame, image=image_tk)
             label.pack()
