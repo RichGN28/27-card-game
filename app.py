@@ -199,11 +199,9 @@ frame3.pack(side=tk.LEFT, padx=100)
 frame_buttons = ttk.Frame(window, width=700, height=300, borderwidth=10, relief=tk.RIDGE)
 frame_buttons.pack(side=tk.LEFT, padx=100, pady=100)
 
+
 # Create entry
 fav_number = tk.IntVar()
-# my_number = get_number()
-
-
 entry_num = ttk.Entry(frame_buttons, textvariable=fav_number)
 entry_num.pack()
 
