@@ -20,12 +20,12 @@ def start_app():
     # Create the start menu window
     global start_menu
     start_menu = tk.Toplevel(window)
-    start_menu.title('Welcome to the 21 Trick Game')
+    start_menu.title('Welcome to the 27 Trick Game')
     start_menu.geometry('1500x1000')
     start_menu.config(background='green')
 
     # Add a welcome message
-    welcome_label = ttk.Label(start_menu, text='Welcome to the 21 Trick Game!')
+    welcome_label = ttk.Label(start_menu, text='Welcome to the 27 Trick Game!')
     welcome_label.pack(pady=10)
 
     # portada
@@ -202,7 +202,6 @@ frame_buttons.pack(side=tk.LEFT, padx=100, pady=100)
 # Create entry
 fav_number = tk.IntVar()
 # my_number = get_number()
-my_number = 1
 
 
 entry_num = ttk.Entry(frame_buttons, textvariable=fav_number)
